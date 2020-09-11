@@ -1,0 +1,62 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+}
+
+body {
+    overflow-x: hidden;
+    color: rgba(29, 29, 31);
+    letter-spacing: -0.05em;
+    background-color: white;
+}
+
+p {
+    line-height: 1.6;
+}
+
+a {
+    all: unset;
+    color: rgba(29, 29, 31);
+    cursor: pointer;
+}
+
+.global_nav {
+    height: 44px;
+}
+
+.local_nav {
+    height: 52px;
+    border-bottom: 1px solid #ddd;
+}
+
+.global_nav_links,
+.local_nav_links {
+    display: flex;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    height: 100%;
+}
+
+.global_nav_links {
+    justify-content: space-between;
+}
+
+.logo {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 900;
+    font-size: 1.3em;
+    margin-right: auto;
+    letter-spacing: -0.05em;
+}
+
+.product_scribe {
+    margin-left: 2em;
+    font-size: 0.8em;
+    color: rgb(90, 90, 90);
+}
