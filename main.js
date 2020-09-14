@@ -57,25 +57,24 @@
     for (let i = 0; i < currentScene; i++) {
       prevScrollHeight = prevScrollHeight + sceneInfo[i].scrollHeight;
     }
-      if (yOffset > prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
-        currentScene++;
-      }
-      if (yOffset < prevScrollHeight) {
-        if (currentScene === 0 ) return;
-        currentScene--;
-      }
-      else if (yOffset > allSceneHeight) {
-        currentScene = 3;
-      }
-    console.log(currentScene)
+    if (yOffset > prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
+      currentScene++;
+    }
+    if (yOffset < prevScrollHeight) {
+      if (currentScene === 0) return; // 모바일 스크롤로 인한 -수치 방지
+      currentScene--;
+    } else if (yOffset > allSceneHeight) { // 모바일 스크롤로 인한 수치 넘어감 방지
+      currentScene = 3;
+    }
+
+    document.body.setAttribute('id', `show_scene_${currentScene}`); //sticky_elem 요소들 scrollHeight에 맞춰 display: block;
   }
 
   window.addEventListener("resize", setLayout);
   window.addEventListener("scroll", () => {
-    console.log(yOffset)
     yOffset = window.pageYOffset;
     scrollLoop();
   });
-  
+
   setLayout();
 })();
