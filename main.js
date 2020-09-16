@@ -11,7 +11,14 @@
       scrollHeight: 0,
       objs: {
         container: document.getElementById("scroll_section_0"),
+        messageOne: document.querySelector('#scroll_section_0 .main_message.one'),
+        messageTwo: document.querySelector('#scroll_section_0 .main_message.two'),
+        messageThree: document.querySelector('#scroll_section_0 .main_message.three'),
+        messageFour: document.querySelector('#scroll_section_0 .main_message.four')
       },
+      values: {
+        messageOneOpacity: [0, 1]
+      }
     },
     {
       //scene id 1
@@ -46,7 +53,39 @@
     // scroll section 높이 세팅
     for (let i = 0; i < sceneInfo.length; i++) {
       sceneInfo[i].scrollHeight = sceneInfo[i].heightNum * window.innerHeight;
-      sceneInfo[i].objs.container.style.height = `${sceneInfo[i].scrollHeight}px`;
+      sceneInfo[
+        i
+      ].objs.container.style.height = `${sceneInfo[i].scrollHeight}px`;
+    }
+
+    yOffset = window.pageYOffset;
+    let totalScrollHeight = 0;
+
+    for (let i = 0; i < sceneInfo.length; i++) {
+      totalScrollHeight += sceneInfo[i].scrollHeight;
+      if (totalScrollHeight >= yOffset) {
+        currentScene = i;
+        break;
+      }
+    }
+    
+    document.body.setAttribute("id", `show_scene_${currentScene}`);
+  }
+
+  function playAnimation() {
+    switch(currentScene) {
+      case 0:
+        console.log('scene 0')
+        break;
+      case 1:
+        console.log('scene 1')
+        break;
+      case 2:
+        console.log('scene 2')
+        break;
+      case 3:
+        console.log('scene 3')
+        break;
     }
   }
 
@@ -59,15 +98,17 @@
     }
     if (yOffset > prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
       currentScene++;
+      document.body.setAttribute("id", `show_scene_${currentScene}`); //sticky_elem 요소들 scrollHeight에 맞춰 display: block;
     }
     if (yOffset < prevScrollHeight) {
       if (currentScene === 0) return; // 모바일 스크롤로 인한 -수치 방지
       currentScene--;
-    } else if (yOffset > allSceneHeight) { // 모바일 스크롤로 인한 수치 넘어감 방지
+      document.body.setAttribute("id", `show_scene_${currentScene}`); //sticky_elem 요소들 scrollHeight에 맞춰 display: block;
+    } else if (yOffset > allSceneHeight) {
+      // 모바일 스크롤로 인한 수치 넘어감 방지
       currentScene = 3;
     }
-
-    document.body.setAttribute('id', `show_scene_${currentScene}`); //sticky_elem 요소들 scrollHeight에 맞춰 display: block;
+    playAnimation();
   }
 
   window.addEventListener("resize", setLayout);
@@ -75,6 +116,5 @@
     yOffset = window.pageYOffset;
     scrollLoop();
   });
-
-  setLayout();
+  window.addEventListener('load', setLayout);
 })();
