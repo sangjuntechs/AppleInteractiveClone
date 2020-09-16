@@ -72,16 +72,28 @@
     document.body.setAttribute("id", `show_scene_${currentScene}`);
   }
 
+  function calcValues(values, currenYOffset) {
+
+  }
+
   function playAnimation() {
+    const objs = sceneInfo[currentScene].objs;
+    const values = sceneInfo[currentScene].values; //현재 스크롤 섹션의 values 객체
+    let currentYOffset = yOffset - prevScrollHeight;//현재 스크롤 섹션에서 스크롤이 얼마나 됐는지에 대한 값
+
     switch(currentScene) {
       case 0:
-        console.log('scene 0')
+        let messageOneOpacity_0 = values.messageOneOpacity[0];
+        let messageOneOpacity_1 = values.messageOneOpacity[1];
+        
+
+        console.log(currentScene, currentYOffset);
         break;
       case 1:
-        console.log('scene 1')
+        console.log(currentScene, currentYOffset);
         break;
       case 2:
-        console.log('scene 2')
+        console.log(currentScene, currentYOffset);
         break;
       case 3:
         console.log('scene 3')
