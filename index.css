@@ -91,6 +91,7 @@ a {
     font-size: 2.3em;
     justify-content: center;
     height: 3em;
+    opacity: 0;
 }
 
 .main_message p {
@@ -181,6 +182,8 @@ li {
     width: 100%;
     box-sizing: border-box;
 }
+
+
 
 #show_scene_0 #scroll_section_0 .sticky_elem,
 #show_scene_1#scroll_section_1 .sticky_elem,

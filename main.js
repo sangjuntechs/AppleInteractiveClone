@@ -74,6 +74,11 @@
 
   function calcValues(values, currenYOffset) {
 
+    let rv;
+    let scrollRatio = currenYOffset / sceneInfo[currentScene].scrollHeight;
+    
+    rv = scrollRatio * (values[1] - values[0]) + values[0];
+    return rv;
   }
 
   function playAnimation() {
@@ -83,20 +88,19 @@
 
     switch(currentScene) {
       case 0:
-        let messageOneOpacity_0 = values.messageOneOpacity[0];
-        let messageOneOpacity_1 = values.messageOneOpacity[1];
-        
+        let messageOneOpacity_in = calcValues(values.messageOneOpacity, currentYOffset)
 
-        console.log(currentScene, currentYOffset);
+        objs.messageOne.style.opacity = messageOneOpacity_in
+        
         break;
       case 1:
-        console.log(currentScene, currentYOffset);
+
         break;
       case 2:
-        console.log(currentScene, currentYOffset);
+        
         break;
       case 3:
-        console.log('scene 3')
+       
         break;
     }
   }
