@@ -17,7 +17,10 @@
         messageFour: document.querySelector('#scroll_section_0 .main_message.four')
       },
       values: {
-        messageOneOpacity: [0, 1]
+        messageOneOpacity: [0, 1, {start: 0.1, end: 0.2}],
+        messageTwoOpacity: [0, 1, {start: 0.3, end: 0.4}],
+        messageThreeOpacity: [0, 1, {start: 0.5, end: 0.6}],
+        messageFourOpacity: [0, 1, {start: 0.7, end: 0.8}]
       }
     },
     {
@@ -72,12 +75,29 @@
     document.body.setAttribute("id", `show_scene_${currentScene}`);
   }
 
-  function calcValues(values, currenYOffset) {
+  function calcValues(values, currentYOffset) {
 
     let rv;
-    let scrollRatio = currenYOffset / sceneInfo[currentScene].scrollHeight;
+    const scrollHeight = sceneInfo[currentScene].scrollHeight;
+    let scrollRatio = currentYOffset / scrollHeight;
+    if (values.length === 3) {
+      //start - end 사이에 실행
+      const scrollStartPart = values[2].start * scrollHeight;
+      const scrollEndPart = values[2].end * scrollHeight;
+      const scrollHeightPart = scrollEndPart - scrollStartPart;
+      
+      if (currentYOffset <= scrollEndPart && currentYOffset >= scrollStartPart) {
+        rv = (currentYOffset - scrollStartPart) / scrollHeightPart * (values[1] - values[0]) + values[0]
+      } else if (currentYOffset < scrollStartPart) {
+        rv = values[0]
+      } else if (currentYOffset > scrollEndPart) {
+        rv = values[1]
+      }
+      
+    } else {
+      rv = scrollRatio * (values[1] - values[0]) + values[0];
+    }
     
-    rv = scrollRatio * (values[1] - values[0]) + values[0];
     return rv;
   }
 
