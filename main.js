@@ -26,7 +26,10 @@
       },
       values: {
         messageOneOpacity_in: [0, 1, { start: 0.1, end: 0.2 }],
+        messageOneTranslate_in: [15, 0, { start : 0.1, end: 0.2}],
         messageOneOpacity_out: [1, 0, { start: 0.25, end: 0.3 }],
+        messageOneTranslate_out: [0, -15, {start: 0.25, end: 0.3}],
+
         messageTwoOpacity: [0, 1, { start: 0.3, end: 0.4 }],
         messageThreeOpacity: [0, 1, { start: 0.5, end: 0.6 }],
         messageFourOpacity: [0, 1, { start: 0.7, end: 0.8 }],
@@ -130,10 +133,15 @@
           values.messageOneOpacity_out,
           currentYOffset
         );
+        let messageOneTranslate_in = calcValues(values.messageOneTranslate_in, currentYOffset);
+        let messageOneTranslate_out = calcValues(values.messageOneTranslate_out, currentYOffset);
+
         if (scrollRatio <= 0.25) {
           objs.messageOne.style.opacity = messageOneOpacity_in;
+          objs.messageOne.style.transform = `translateY(${messageOneTranslate_in}%)`;
         } else {
           objs.messageOne.style.opacity = messageOneOpacity_out;
+          objs.messageOne.style.transform = `translateY(${messageOneTranslate_out}%)`;
         }
         break;
       case 1:
