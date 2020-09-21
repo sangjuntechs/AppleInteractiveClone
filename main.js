@@ -62,7 +62,28 @@
       scrollHeight: 0,
       objs: {
         container: document.getElementById("scroll_section_2"),
+        messageOne: document.querySelector('#scroll_section_2 .one'),
+        messageTwo: document.querySelector('#scroll_section_2 .two'),
+        messageThree: document.querySelector('#scroll_section_2 .three'),
+        
       },
+      values: {
+        messageOneOpacity_in: [0, 1 , {start: 0.15, end:0.2}],
+        messageTwoOpacity_in: [0,1,{start:0.5, end:0.55}],
+        messageThreeOpacity_in: [0,1,{start:0.72, end:0.77}],
+        messageOneTranslate_in: [15, 0, {start:0.15, end:0.2}],
+        messageTwoTranslate_in: [25, 0 , {start:0.5, end:0.55}],
+        messageThreeTranslate_in: [25, 0 , {start:0.72, end:0.77}],
+
+        messageOneOpacity_out: [1 ,0 ,{start:0.3, end: 0.35}],
+        messageTwoOpacity_out: [1, 0, {start:0.58, end:0.63}],
+        messageThreeOpacity_out: [1,0, {start:0.85, end:0.9}],
+        messageOneTranslate_out: [0, -20, {start:0.3, end: 0.35}],
+        messageTwoTranslate_out: [0, -20, {start:0.58, end:0.63}],
+        messageThreeTranslate_out: [0, -20, {start:0.85, end:0.9} ],
+
+
+      }
     },
     {
       //scene id 3
@@ -83,9 +104,7 @@
       } else if (sceneInfo[i].type === "normal") {
         sceneInfo[i].scrollHeight = sceneInfo[i].objs.container.offsetHeight;
       }
-      sceneInfo[
-        i
-      ].objs.container.style.height = `${sceneInfo[i].scrollHeight}px`;
+      sceneInfo[i].objs.container.style.height = `${sceneInfo[i].scrollHeight}px`;
     }
 
     yOffset = window.pageYOffset;
@@ -252,6 +271,51 @@
       case 1:
         break;
       case 2:
+        let messageOneOpacity_in2 = calcValues(values.messageOneOpacity_in, currentYOffset);
+        let messageOneOpacity_out2 = calcValues(values.messageOneOpacity_out, currentYOffset);
+        let messageOneTranslate_in2 = calcValues(values.messageOneTranslate_in, currentYOffset);
+        let messageOneTranslate_out2 = calcValues(values.messageOneTranslate_out, currentYOffset);
+
+        let messageTwoOpacity_in2 = calcValues(values.messageTwoOpacity_in, currentYOffset);
+        let messageTwoOpacity_out2 = calcValues(values.messageTwoOpacity_out, currentYOffset);
+        let messageTwoTranslate_in2 = calcValues(values.messageTwoTranslate_in, currentYOffset);
+        let messageTwoTranslate_out2 = calcValues(values.messageTwoTranslate_out, currentYOffset);
+
+        let messageThreeOpacity_in2 = calcValues(values.messageThreeOpacity_in, currentYOffset);
+        let messageThreeOpacity_out2 = calcValues(values.messageThreeOpacity_out, currentYOffset);
+        let messageThreeTranslate_in2 = calcValues(values.messageThreeTranslate_in, currentYOffset);
+        let messageThreeTranslate_out2 = calcValues(values.messageThreeTranslate_out, currentYOffset);
+
+        
+
+        if (scrollRatio <= 0.25) {
+          objs.messageOne.style.opacity = messageOneOpacity_in2;
+          objs.messageOne.style.transform = `translateY(${messageOneTranslate_in2}%)`
+        } else {
+          objs.messageOne.style.opacity = messageOneOpacity_out2;
+          objs.messageOne.style.transform = `translateY(${messageOneTranslate_out2}%)`
+        }
+
+        if (scrollRatio <= 0.58) {
+          objs.messageTwo.style.opacity = messageTwoOpacity_in2;
+          objs.messageTwo.style.transform = `translateY(${messageTwoTranslate_in2}%)`;
+          
+          
+        } else if (scrollRatio > 0.58) {
+          objs.messageTwo.style.opacity = messageTwoOpacity_out2;
+          objs.messageTwo.style.transform = `translateY(${messageTwoTranslate_out2}%)`;
+          
+        }
+
+        if (scrollRatio <= 0.85) {
+          objs.messageThree.style.opacity = messageThreeOpacity_in2;
+          objs.messageThree.style.transform = `translateY(${messageThreeTranslate_in2}%)`;
+  
+        } else if (scrollRatio > 0.85) {
+          objs.messageThree.style.opacity = messageThreeOpacity_out2;
+          objs.messageThree.style.transform = `translateY(${messageThreeTranslate_out2}%)`;
+        }
+
         break;
       case 3:
         break;
