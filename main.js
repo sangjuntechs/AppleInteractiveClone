@@ -26,13 +26,24 @@
       },
       values: {
         messageOneOpacity_in: [0, 1, { start: 0.1, end: 0.2 }],
-        messageOneTranslate_in: [15, 0, { start : 0.1, end: 0.2}],
+        messageOneTranslate_in: [15, 0, { start: 0.1, end: 0.2 }],
         messageOneOpacity_out: [1, 0, { start: 0.25, end: 0.3 }],
-        messageOneTranslate_out: [0, -15, {start: 0.25, end: 0.3}],
+        messageOneTranslate_out: [0, -15, { start: 0.25, end: 0.3 }],
 
-        messageTwoOpacity: [0, 1, { start: 0.3, end: 0.4 }],
-        messageThreeOpacity: [0, 1, { start: 0.5, end: 0.6 }],
-        messageFourOpacity: [0, 1, { start: 0.7, end: 0.8 }],
+        messageTwoOpacity_in: [0, 1, { start: 0.3, end: 0.4 }],
+        messageTwoOpacity_out: [1, 0, { start: 0.45, end: 0.5 }],
+        messageTwoTranslate_in: [15, 0, { start: 0.3, end: 0.4 }],
+        messageTwoTranslate_out: [0, -15, { start: 0.45, end: 0.5 }],
+
+        messageThreeOpacity_in: [0, 1, { start: 0.5, end: 0.6 }],
+        messageThreeOpacity_out: [1, 0, { start: 0.65, end: 0.7 }],
+        messageThreeTranslate_in: [15, 0, { start: 0.5, end: 0.6 }],
+        messageThreeTranslate_out: [0, -15, { start: 0.65, end: 0.7 }],
+
+        messageFourOpacity_in: [0, 1, { start: 0.7, end: 0.8 }],
+        messageFourOpacity_out: [1, 0, { start: 0.85, end: 0.9 }],
+        messageFourTranslate_in: [15, 0, { start: 0.7, end: 0.8 }],
+        messageFourTranslate_out: [0, -15, { start: 0.85, end: 0.9 }],
       },
     },
     {
@@ -67,13 +78,14 @@
   function setLayout() {
     // scroll section 높이 세팅
     for (let i = 0; i < sceneInfo.length; i++) {
-      if (sceneInfo[i].type === 'sticky') {
-      sceneInfo[i].scrollHeight = sceneInfo[i].heightNum * window.innerHeight;
-      
-      } else if( sceneInfo[i].type === 'normal') {
+      if (sceneInfo[i].type === "sticky") {
+        sceneInfo[i].scrollHeight = sceneInfo[i].heightNum * window.innerHeight;
+      } else if (sceneInfo[i].type === "normal") {
         sceneInfo[i].scrollHeight = sceneInfo[i].objs.container.offsetHeight;
       }
-      sceneInfo[i].objs.container.style.height = `${sceneInfo[i].scrollHeight}px`;
+      sceneInfo[
+        i
+      ].objs.container.style.height = `${sceneInfo[i].scrollHeight}px`;
     }
 
     yOffset = window.pageYOffset;
@@ -134,12 +146,75 @@
           values.messageOneOpacity_in,
           currentYOffset
         );
+
+        let messageTwoOpacity_in = calcValues(
+          values.messageTwoOpacity_in,
+          currentYOffset
+        );
+
+        let messageThreeOpacity_in = calcValues(
+          values.messageThreeOpacity_in,
+          currentYOffset
+        );
+
+        let messageFourOpacity_in = calcValues(
+          values.messageFourOpacity_in,
+          currentYOffset
+        );
+
         let messageOneOpacity_out = calcValues(
           values.messageOneOpacity_out,
           currentYOffset
         );
-        let messageOneTranslate_in = calcValues(values.messageOneTranslate_in, currentYOffset);
-        let messageOneTranslate_out = calcValues(values.messageOneTranslate_out, currentYOffset);
+
+        let messageTwoOpacity_out = calcValues(
+          values.messageTwoOpacity_out,
+          currentYOffset
+        );
+
+        let messageThreeOpacity_out = calcValues(
+          values.messageThreeOpacity_out,
+          currentYOffset
+        );
+
+        let messageFourOpacity_out = calcValues(
+          values.messageFourOpacity_out,
+          currentYOffset
+        );
+
+        let messageOneTranslate_in = calcValues(
+          values.messageOneTranslate_in,
+          currentYOffset
+        );
+        let messageTwoTranslate_in = calcValues(
+          values.messageTwoTranslate_in,
+          currentYOffset
+        );
+        let messageThreeTranslate_in = calcValues(
+          values.messageThreeTranslate_in,
+          currentYOffset
+        );
+        let messageFourTranslate_in = calcValues(
+          values.messageFourTranslate_in,
+          currentYOffset
+        );
+
+        let messageOneTranslate_out = calcValues(
+          values.messageOneTranslate_out,
+          currentYOffset
+        );
+        let messageTwoTranslate_out = calcValues(
+          values.messageTwoTranslate_out,
+          currentYOffset
+        );
+        let messageThreeTranslate_out = calcValues(
+          values.messageThreeTranslate_out,
+          currentYOffset
+        );
+        let messageFourTranslate_out = calcValues(
+          values.messageFourTranslate_out,
+          currentYOffset
+        );
 
         if (scrollRatio <= 0.25) {
           objs.messageOne.style.opacity = messageOneOpacity_in;
@@ -148,6 +223,31 @@
           objs.messageOne.style.opacity = messageOneOpacity_out;
           objs.messageOne.style.transform = `translateY(${messageOneTranslate_out}%)`;
         }
+
+        if (scrollRatio <= 0.45) {
+          objs.messageTwo.style.opacity = messageTwoOpacity_in;
+          objs.messageTwo.style.transform = `translateY(${messageTwoTranslate_in}%)`;
+        } else if (scrollRatio > 0.45) {
+          objs.messageTwo.style.opacity = messageTwoOpacity_out;
+          objs.messageTwo.style.transform = `translateY(${messageTwoTranslate_out}%)`;
+        }
+
+        if (scrollRatio <= 0.65) {
+          objs.messageThree.style.opacity = messageThreeOpacity_in;
+          objs.messageThree.style.transform = `translateY(${messageThreeTranslate_in}%)`;
+        } else if (scrollRatio > 0.65) {
+          objs.messageThree.style.opacity = messageThreeOpacity_out;
+          objs.messageThree.style.transform = `translateY(${messageThreeTranslate_out}%)`;
+        }
+
+        if (scrollRatio <= 0.85) {
+          objs.messageFour.style.opacity = messageFourOpacity_in;
+          objs.messageFour.style.transform = `translateY(${messageFourTranslate_in}%)`;
+        } else if (scrollRatio > 0.85) {
+          objs.messageFour.style.opacity = messageFourOpacity_out;
+          objs.messageFour.style.transform = `translateY(${messageFourTranslate_out}%)`;
+        }
+
         break;
       case 1:
         break;

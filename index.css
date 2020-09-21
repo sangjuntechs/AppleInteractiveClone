@@ -136,6 +136,15 @@ a {
     background-color: black;
 }
 
+#scroll_section_2 .two{
+    top: 10%;
+    left: 40%;
+}
+
+#scroll_section_2 .three {
+    top:15%;
+    left:45%;
+}
 .mid_message {
     font-size: 2rem;
     padding: 0 1rem;
