@@ -46,6 +46,14 @@ a {
     padding-left: 1em;
     padding-right: 1em;
     box-sizing: border-box;
+    z-index:11;
+}
+
+.local_nav_sticky .local_nav {
+    position: fixed;
+    top:0;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: saturate(130%) blur(10px);
 }
 
 .global_nav_links,
